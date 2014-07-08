@@ -7,8 +7,25 @@
 
   </head>
   <body>
-    <div id='content' ng-app='myApp' ng-controller='MainController'>
-      {{understand}}
+    <div class='content' ng-app='myApp' ng-controller='MainController'>
+      <!-- binding -->
+      <div>
+      <input type='text' ng-model='inputValue' />
+        {{inputValue}}
+      </div>
+      <div>
+        <select ng-model='selectedPerson' ng-options='opt.name for opt in people'></select>
+        <select ng-model='selectedGenre'>
+          <option ng-repeat='label in people[selectedPerson.id].music'>{{label}}</option>
+        </select>
+      </div>
+      <!-- filtering data -->
+      <div>
+        <input type='text' ng-model='searchText' />
+        <ul>
+            <li ng-repeat='person in people | filter:searchText'>#{{person.id}} {{person.name}}</li>
+        </ul>
+      </div>
     </div>
   </body>
 </html>
