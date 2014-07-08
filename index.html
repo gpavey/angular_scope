@@ -1,0 +1,51 @@
+<DOCTYPE html>
+  <head>
+    <title>Angular Scope</title>
+         <script src="./vendor/javascript/angular.min.js" type="text/javascript"></script>
+         <script src="./app.js" type="text/javascript"></script>
+         <script src="./app/controller/main_controller.js" type="text/javascript"></script>
+
+  </head>
+  <body>
+    <div class='content' ng-app='myApp' ng-controller='MainController'>
+      <!-- binding -->
+      <div>
+      <input type='text' ng-model='inputValue' />
+        {{inputValue}}
+      </div>
+      <div>
+        <select ng-model='selectedPerson' ng-options='opt.name for opt in people'></select>
+        <select ng-model='selectedGenre'>
+          <option ng-repeat='label in people[selectedPerson.id].music'>{{label}}</option>
+        </select>
+      </div>
+      <!-- filtering data -->
+      <div>
+        <input type='text' ng-model='searchText' />
+        <span>Filtering data</span>
+        <ul>
+            <li ng-repeat='person in people | filter:searchText'>#{{person.id}} {{person.name}}</li>
+        </ul>
+      </div>
+      <div>
+        <input type='text' ng-model='searchText' />
+          <span>Using ng-show and ng-hide</span>
+        <ul>
+            <li ng-repeat='person in people | filter:searchText' ng-show='person.live == true'>#{{person.id}} {{person.name}}</li>
+        </ul>
+        <ul>
+            <li ng-repeat='person in people | filter:searchText' ng-hide='person.live == false'>#{{person.id}} {{person.name}}</li>
+        </ul>
+      </div>
+      <div>
+        <input type='text' ng-model='searchText' />
+        <span>Events</span>
+        <ul>
+            <li ng-repeat='person in people | filter:searchText' ng-show='person.live == true'>#{{person.id}} {{person.name}}</li>
+        </ul>
+        <input type='text' ng-model='newPerson' />
+        <button ng-click='addNew()'>Add</button>
+      </div>
+    </div>
+  </body>
+</html>
